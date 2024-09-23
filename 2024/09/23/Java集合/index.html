@@ -1,0 +1,304 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Java集合 | 被淹死的鱼</title><meta name="author" content="Huiyang"><meta name="copyright" content="Huiyang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Java中的集合类Java中集合类主要分为两大类：Collection接口和Map接口。前者是存储对象的集合类，后者存储的是键值对。 Collection接口下又分为List、Set、Queue接口。每个接口有其具体实现类： List 接口:  ArrayList:基于动态数组,查询速度快,插入、删除慢。 LinkedList:基于双向链表,插入、删除快,查询速度慢。 Vector:线程安全的动态">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java集合">
+<meta property="og:url" content="https://drownedfish21.github.io/2024/09/23/Java%E9%9B%86%E5%90%88/index.html">
+<meta property="og:site_name" content="被淹死的鱼">
+<meta property="og:description" content="Java中的集合类Java中集合类主要分为两大类：Collection接口和Map接口。前者是存储对象的集合类，后者存储的是键值对。 Collection接口下又分为List、Set、Queue接口。每个接口有其具体实现类： List 接口:  ArrayList:基于动态数组,查询速度快,插入、删除慢。 LinkedList:基于双向链表,插入、删除快,查询速度慢。 Vector:线程安全的动态">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://haowallpaper.com/link/common/file/previewFileImg/f351ca6264cb84d5053926824a04634af351ca6264cb84d5053926824a04634a">
+<meta property="article:published_time" content="2024-09-23T01:07:49.000Z">
+<meta property="article:modified_time" content="2024-09-23T01:52:24.961Z">
+<meta property="article:author" content="Huiyang">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://haowallpaper.com/link/common/file/previewFileImg/f351ca6264cb84d5053926824a04634af351ca6264cb84d5053926824a04634a"><link rel="shortcut icon" href="/img/yu.jpg"><link rel="canonical" href="https://drownedfish21.github.io/2024/09/23/Java%E9%9B%86%E5%90%88/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Java集合',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-23 09:52:24'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/yu.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 历程</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url('https://haowallpaper.com/link/common/file/previewFileImg/f351ca6264cb84d5053926824a04634af351ca6264cb84d5053926824a04634a')"><nav id="nav"><span id="blog-info"><a href="/" title="被淹死的鱼"><span class="site-name">被淹死的鱼</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 历程</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Java集合</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-09-23T01:07:49.000Z" title="发表于 2024-09-23 09:07:49">2024-09-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-23T01:52:24.961Z" title="更新于 2024-09-23 09:52:24">2024-09-23</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Java集合"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2024/09/23/Java%E9%9B%86%E5%90%88/#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Java中的集合类"><a href="#Java中的集合类" class="headerlink" title="Java中的集合类"></a>Java中的集合类</h2><p>Java中集合类主要分为两大类：Collection接口和Map接口。前者是存储对象的集合类，后者存储的是键值对。</p>
+<p>Collection接口下又分为List、Set、Queue接口。每个接口有其具体实现类：</p>
+<p><strong>List 接口</strong>:</p>
+<ul>
+<li>ArrayList:基于动态数组,查询速度快,插入、删除慢。</li>
+<li>LinkedList:基于双向链表,插入、删除快,查询速度慢。</li>
+<li>Vector:线程安全的动态数组,类似于ArrayList,但开销较大。</li>
+</ul>
+<p><strong>Set接口</strong>:</p>
+<ul>
+<li>HashSet:基于哈希表,元素无序,不允许重复。</li>
+<li>LinkedHashSet:基于链表和哈希表,维护插入顺序,不允许重复。</li>
+<li>TreeSet:基于红黑树,元素有序,不允许重复。</li>
+</ul>
+<p>所以网上有些说Set是无序集合非常不准确,因为需要看具体的实现类。</p>
+<p><strong>Queue 接口</strong>:</p>
+<ul>
+<li>PriorityQueue:基于优先级堆,元素按照自然顺序或指定比较器排序。</li>
+<li>LinkedList:可以作为队列使用,支持FIFO(先进先出)操作。</li>
+</ul>
+<p><strong>Map 接口</strong>:</p>
+<p>存储的是键值对,也就是给对象(value)设置了一个key,这样通过key可以找到那个<br>value.</p>
+<ul>
+<li>HashMap:基于哈希表,键值对无序,不允许键重复。</li>
+<li>LinkedHashMap:基于链表和哈希表,维护插入顺序,不允许键重复。</li>
+<li>TreeMap:基于红黑树,键值对有序,不允许键重复。</li>
+<li>Hashtable:线程安全的哈希表,不允许键或值为null。</li>
+<li>ConcurrentHashMap:线程安全的哈希表,适合高并发环境,不允许键或值为null。</li>
+</ul>
+<h2 id="Java中数组和链表的区别"><a href="#Java中数组和链表的区别" class="headerlink" title="Java中数组和链表的区别"></a>Java中数组和链表的区别</h2><p><strong>在存储结构方面</strong>:</p>
+<p>数组基于连续的内存块,大小是固定的,需要重新分配内存来改变数组大小,内存使用紧凑但容易浪费空间。</p>
+<p>链表是基于节点的结构,在内存中不需要连续存储,可以动态变化大小和插入删除节点,内存不连续但可以动态扩展。</p>
+<p><strong>在访问速度方面</strong>:</p>
+<p>数组支持O(1)时间的随机访问,可以通过索引直接访问任何元素。</p>
+<p>而链表访问特定元素需要线性时间O(n),因为节点在内存中不一定连续,访问效率受限于链表的结构。</p>
+<p><strong>在操作方面</strong>:</p>
+<p>数组插入和删除需要移动数据,时间复杂度为O(n),而链表则很灵活,可在O(1)时间插入和修改指定位置元素。</p>
+<p>在适用场景方面:</p>
+<p>数组适合需要快速随机访问且大小固定的场景,如实现缓存、表格等数据结构。</p>
+<p>链表适合需要频繁插入和删除操作且大小不确定的场景,如队列、栈、链表等</p>
+<h2 id="Java中List接口的实现类"><a href="#Java中List接口的实现类" class="headerlink" title="Java中List接口的实现类"></a>Java中List接口的实现类</h2><p>List 接口主要包含 ArrayList、LinkedList、Vector、Stack、CopyOnWriteArrayList 几个实现<br>类。</p>
+<p>最常见的就是ArrayList和LinkedList,注意这两者都不是并发容器,所以线程不安全。</p>
+<p>ArrayList 是基于动态数组实现的,因此它的特性与数组一致,随机访问很快,删除和插入相对比较慢。</p>
+<ul>
+<li>随机访问时间复杂度为O(1)。</li>
+<li>插入和删除(除了在列表末尾)时间复杂度为O(n)。</li>
+</ul>
+<p>LinkedList 是基于双向链表实现的,因此两端都能操作,特性就是正常的链表特性,两端插入删除很快,但是随机访问需要遍历链表所以比较慢。</p>
+<ul>
+<li>随机访问时间复杂度为O(n),需要遍历链表</li>
+<li>插入和删除时间复杂度为 O(1)。</li>
+</ul>
+<p>Vector：基于动态数组实现,与ArrayList类似,但它是线程安全,所有法都是同步的，加了synchronized这把锁。也因为同步开销大，所以性能相对较低。</p>
+<p>CopyOnWriteArrayList：基于动态数组实现,但所有可变操作(如add()、set()等)都会创建一个新的数组。它其实运用了一个叫写时复制的技术,即当写的时候,再去复制。它是线程安全的,适合在多线程环境中频繁读取、很少修改的场景。</p>
+<p>AbstractList：一个抽象类,实现了List接口的大部分方法,提供了基本的List功能。如果我们想要扩展实现自己的列表,那么可以用它作为自定义列表实现的基础类,大大减少我们的自定义成本。</p>
+<h2 id="Java中HashMap和Hashtable的区别"><a href="#Java中HashMap和Hashtable的区别" class="headerlink" title="Java中HashMap和Hashtable的区别"></a>Java中HashMap和Hashtable的区别</h2><ol>
+<li>线程安全性:</li>
+</ol>
+<ul>
+<li>HashMap:<strong>非线程安全</strong>,多线程环境下可能会产生数据不一致问题。</li>
+<li>Hashtable:<strong>线程安全</strong>,内部大部分方法都使用了synchronized关键字进行同步,保证了多线程的并发安全性。</li>
+</ul>
+<ol start="2">
+<li>性能差异:</li>
+</ol>
+<p>** HashMap:由于没有线程同步开销,因此在单线程环境下性能优于Hashtable。<br>** Hashtable:由于方法的同步锁机制,性能低于HashMap。由于使用全局锁的方式,使得即使是不同的操作也会被串行化。</p>
+<ol start="3">
+<li>允许空值:</li>
+</ol>
+<ul>
+<li>HashMap：允许一个null键和多个null值。</li>
+<li>Hashtable：不允许null键和null值。插入null会抛出空指针异常。</li>
+</ul>
+<ol start="4">
+<li>继承结构：</li>
+</ol>
+<ul>
+<li>HashMao：继承自AbstractMap，是Map接口的实现类。</li>
+<li>Hashtable：继承自Dictionary(已废弃)，后来也实现了Map接口。一种较为古老的类，在Java2后逐渐被HashMap代替，不推荐使用。</li>
+</ul>
+<ol start="5">
+<li>迭代器类型：</li>
+</ol>
+<ul>
+<li>HashMap:使用的是快速失败的Iterator在迭代过程中如果对Map 进行结构性修改,会抛出ConcurrentModificationException。</li>
+<li>Hashtable: 使用的是弱一致性的Enumerator，虽然也不建议在迭代过程中修改Map,但不会抛出ConcurrentModificationException。</li>
+</ul>
+<p>ConcurrentHashMap：<br>ConcurrentHashMap是Hashtable的替代方案。它在实现线程安全的同时,通过分段锁机制提高了并发性能,避免了全局锁导致的性能瓶颈。适用于高并发环境。<br>ConcurrentHashMap的读操作无锁化,写操作则使用了局部锁分段,使得在高并发下性能大大优于 Hashtable。</p>
+<h2 id="Java中HashSet和HashMap的区别"><a href="#Java中HashSet和HashMap的区别" class="headerlink" title="Java中HashSet和HashMap的区别"></a>Java中HashSet和HashMap的区别</h2><p>Hashset：</p>
+<ul>
+<li>基于哈希表的存储结构,只存储元素的值。但实际上它是基于hashmap来实现的,其中HashSet的元素作为hashmap的键存储,而所有的值都指向一个同一个特殊值,通常是null;</li>
+<li>保证了元素的唯一性,不允许有重复元素。</li>
+<li>只能通过元素的值来访问和操作。</li>
+<li>存储单一类型的元素。</li>
+</ul>
+<p>hashMap：</p>
+<ul>
+<li>基于键值对的存储结构,每个元素由一个键和对应的值的组成。</li>
+<li>保证键的唯一性,而值可以重复。</li>
+<li>可以通过键来快速查找,插入和删除元素。</li>
+<li>可以存储键值对,其中键和值可以是不同类型的对象。</li>
+</ul>
+<p>共同点:</p>
+<ul>
+<li>HashSet和hashMap都不是线程安全的。可以考虑使用Collections,synchronized Set&#x2F;Map<br>方法才能转换成线程安全的即可,或者使用ConcurrentHashMap和CopyOnWriteArrayList等并发集合</li>
+<li>无序集合。</li>
+<li>使用场景前者需要存储单一的元素,且不关心元素顺序。后者需要根据键来查找插入和删除建制对的场景。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://drownedfish21.github.io">Huiyang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://drownedfish21.github.io/2024/09/23/Java%E9%9B%86%E5%90%88/">https://drownedfish21.github.io/2024/09/23/Java%E9%9B%86%E5%90%88/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://drownedfish21.github.io" target="_blank">被淹死的鱼</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a></div><div class="post_share"><div class="social-share" data-image="https://haowallpaper.com/link/common/file/previewFileImg/f351ca6264cb84d5053926824a04634af351ca6264cb84d5053926824a04634a" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/09/17/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%92%8C%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/" title="面向对象和面向过程的区别"><img class="cover" src="https://tse1-mm.cn.bing.net/th/id/OIP-C.D3Hq33s2XKlDsB58Ex-LeQHaE8?rs=1&amp;pid=ImgDetMain" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">面向对象和面向过程的区别</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/yu.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Huiyang</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/DrownedFish21" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="/2496497536@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://space.bilibili.com/175754731?spm_id_from=333.1007.0.0" target="_blank" title="bilibili"><i class="fab fa-bilibili" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">小站正在测试阶段，bug请及时反馈！部分图片来自网络，如有版权问题，请联系我删除。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E4%B8%AD%E7%9A%84%E9%9B%86%E5%90%88%E7%B1%BB"><span class="toc-number">1.</span> <span class="toc-text">Java中的集合类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E4%B8%AD%E6%95%B0%E7%BB%84%E5%92%8C%E9%93%BE%E8%A1%A8%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text">Java中数组和链表的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E4%B8%ADList%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%B1%BB"><span class="toc-number">3.</span> <span class="toc-text">Java中List接口的实现类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E4%B8%ADHashMap%E5%92%8CHashtable%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">4.</span> <span class="toc-text">Java中HashMap和Hashtable的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java%E4%B8%ADHashSet%E5%92%8CHashMap%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">5.</span> <span class="toc-text">Java中HashSet和HashMap的区别</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/09/23/Java%E9%9B%86%E5%90%88/" title="Java集合"><img src="https://haowallpaper.com/link/common/file/previewFileImg/f351ca6264cb84d5053926824a04634af351ca6264cb84d5053926824a04634a" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java集合"/></a><div class="content"><a class="title" href="/2024/09/23/Java%E9%9B%86%E5%90%88/" title="Java集合">Java集合</a><time datetime="2024-09-23T01:07:49.000Z" title="发表于 2024-09-23 09:07:49">2024-09-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/17/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%92%8C%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/" title="面向对象和面向过程的区别"><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.D3Hq33s2XKlDsB58Ex-LeQHaE8?rs=1&amp;pid=ImgDetMain" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="面向对象和面向过程的区别"/></a><div class="content"><a class="title" href="/2024/09/17/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%92%8C%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB/" title="面向对象和面向过程的区别">面向对象和面向过程的区别</a><time datetime="2024-09-17T07:07:19.000Z" title="发表于 2024-09-17 15:07:19">2024-09-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/17/Java%E5%9F%BA%E7%A1%80/" title="Java基础"><img src="https://pica.zhimg.com/v2-24c4464567b0db7011ba4e9c7359852b_720w.jpg?source=172ae18b" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java基础"/></a><div class="content"><a class="title" href="/2024/09/17/Java%E5%9F%BA%E7%A1%80/" title="Java基础">Java基础</a><time datetime="2024-09-17T06:29:26.045Z" title="发表于 2024-09-17 14:29:26">2024-09-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/17/java%E4%B8%AD%E7%9A%84%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%B1%BB/" title="java中的不可变类"><img src="https://haowallpaper.com/link/common/file/previewFileImg/f351ca6264cb84d5053926824a04634af351ca6264cb84d5053926824a04634a" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java中的不可变类"/></a><div class="content"><a class="title" href="/2024/09/17/java%E4%B8%AD%E7%9A%84%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%B1%BB/" title="java中的不可变类">java中的不可变类</a><time datetime="2024-09-17T06:27:53.000Z" title="发表于 2024-09-17 14:27:53">2024-09-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/16/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" title="Java中的序列化与反序列化"><img src="https://haowallpaper.com/link/common/file/previewFileImg/f351ca6264cb84d5053926824a04634af351ca6264cb84d5053926824a04634a" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java中的序列化与反序列化"/></a><div class="content"><a class="title" href="/2024/09/16/Java%E4%B8%AD%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" title="Java中的序列化与反序列化">Java中的序列化与反序列化</a><time datetime="2024-09-16T12:08:50.000Z" title="发表于 2024-09-16 20:08:50">2024-09-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Huiyang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://dfish.netlify.app/.netlify/functions/twikoo',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://dfish.netlify.app/.netlify/functions/twikoo',
+      region: '',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else getScript('https://cdn.jsdelivr.net/npm/twikoo@1.6.31/dist/twikoo.all.min.js').then(init)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
